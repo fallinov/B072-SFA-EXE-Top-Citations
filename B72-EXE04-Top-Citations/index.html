@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- Bulma : pour créer efficacement des interface Web -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css">
+  <!-- Font Awesome : polices et pack d'icônes très populaire -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
+  <!-- Style de l'applicaiton -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <title>Top Citations</title>
+</head>
+
+<body>
+  <!-- DIV #app qui contiendra notre application Vue -->
+  <div id="app">
+    <h1 class="title has-text-centered dividing-header">Top Citations</h1>
+
+    <div class="section">
+      <!-- Exemple de code HTML pour un article -->
+      <article class="media">
+        <figure class="media-left">
+          <img class="image is-64x64"
+               src="./img/animaux/Ours.png"
+               alt="L'ours"
+               style="background-color: #ffeedb"
+          >
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <p>
+              <strong>
+                <a href="https://citation-celebre.leparisien.fr/citations/49179"
+                   class="has-text-info"
+                >
+                  L'ours
+                </a>
+                <span class="tag is-small">#1</span>
+              </strong>
+              <br>
+              Il ne faut pas vendre la peau de l'ours avant de l'avoir tué.
+              <br>
+              <small class="is-size-7">
+                Postée par :
+                <img class="image is-24x24"
+                     src="./img/avatars/daniel.jpg"
+                     title="Daniel Le Blanc"
+                >
+              </small>
+            </p>
+          </div>
+        </div>
+        <div class="media-right">
+            <span class="icon is-small">
+              <i class="fa fa-chevron-up"></i>
+              <strong class="has-text-info">16</strong>
+            </span>
+        </div>
+      </article>
+    </div> <!-- fin .section -->
+  </div> <!-- fin #app -->
+
+  <!-- Vue.js -->
+  <script src="https://unpkg.com/vue"></script>
+  <!-- Tableau d'objets représentant les articles -->
+  <script src="js/citations.js"></script>
+  <!-- Code JS de l'application | C'est ici qu'il faut créer l'objet Vue -->
+  <script src="js/main.js"></script>
+</body>
+
+</html>
