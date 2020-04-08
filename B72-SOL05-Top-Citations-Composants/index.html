@@ -75,48 +75,10 @@
 
     </div>
     <!-- Exemple de code HTML pour un article -->
-    <article v-for="citation in triParVotes"
-             :key="citation.id"
-             :class="{ 'blue-border': citation.votes >= 20 }"
-            class="media">
-      <figure class="media-left">
-        <img class="image is-64x64"
-             :src="'./img/animaux/' + citation.image"
-             :alt="citation.titre"
-             :style="'background-color:' + citation.couleur"
-        >
-      </figure>
-      <div class="media-content">
-        <div class="content">
-          <p>
-            <strong>
-              <a :href="citation.url"
-                 class="has-text-info"
-              >
-                {{ citation.titre }}
-              </a>
-              <span class="tag is-small">#{{ citation.id }}</span>
-            </strong>
-            <br>
-            {{ citation.texte }}
-            <br>
-            <small class="is-size-7">
-              Postée par :
-              <img class="image is-24x24"
-                   :src="'./img/avatars/' + citation.auteur.avatar"
-                   :title="citation.auteur.nom + ' ' + citation.auteur.prenom"
-              >
-            </small>
-          </p>
-        </div>
-      </div>
-      <div class="media-right">
-            <span class="icon is-small">
-              <i @click="voter(citation.id)" class="fa fa-chevron-up"></i>
-              <strong class="has-text-info">{{ citation.votes }}</strong>
-            </span>
-      </div>
-    </article>
+    <citation v-for="citation in triParVotes"
+              :key="citation.id"
+              :citation="citation"
+    ></citation>
   </div> <!-- fin .section -->
 </div> <!-- fin #app -->
 
