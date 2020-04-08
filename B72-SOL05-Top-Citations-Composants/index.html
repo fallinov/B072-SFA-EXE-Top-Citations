@@ -18,62 +18,8 @@
   <h1 class="title has-text-centered dividing-header">Top Citations</h1>
 
   <div class="section">
-    <div>
-      <div class="field">
-        <label class="label">Titre</label>
-        <div class="control">
-          <input class="input" type="text"
-                 placeholder="Titre de votre citation">
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Texte</label>
-        <div class="control">
-          <textarea class="textarea"
-                    placeholder="Texte de votre citation"></textarea>
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="control">
-          <label class="radio">
-            <input type="radio" name="image">
-            <img src="./img/animaux/Lion.png">
-          </label>
-          <label class="radio">
-            <input type="radio" name="image">
-            <img src="./img/animaux/Ours.png">
-          </label>
-          <label class="radio">
-            <input type="radio" name="image">
-            <img src="./img/animaux/Chameau.png">
-          </label>
-          <label class="radio">
-            <input type="radio" name="image">
-            <img src="./img/animaux/Elephant.png">
-          </label>
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="label">Auteur</label>
-        <div class="control">
-          <div class="select">
-            <select>
-              <option>Sélectionner un auteur</option>
-              <option>With options</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-
-      <button class="button is-primary">Ajouter la citation</button>
-
-      <hr>
-
-    </div>
+    <citation-form @ajouter="ajouterCitation"></citation-form>
+    <hr>
     <!-- Exemple de code HTML pour un article -->
     <citation v-for="citation in triParVotes"
               :key="citation.id"

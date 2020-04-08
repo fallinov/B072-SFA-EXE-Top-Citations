@@ -1,3 +1,10 @@
+const personnes = [
+  { id: 1, prenom: 'Kristy', nom: 'Lavilla',  avatar: 'kristy.png' },
+  { id: 2, prenom: 'Veronika', nom: 'Smith', avatar: 'veronika.jpg' },
+  { id: 3, prenom: 'Daniel', nom: 'Le Blanc', avatar: 'daniel.jpg', },
+  { id: 4,  prenom: 'Molly', nom: 'Müller', avatar: 'molly.png' },
+];
+
 let CitationImage = Vue.component('citation-image', {
   props: {
     image: {
@@ -130,6 +137,117 @@ let Citation = Vue.component('citation', {
               </article>`
 });
 
+let CitationForm = Vue.component('citation-form', {
+  data: function() {
+    return {
+      citation: {
+        titre: '',
+        texte: '',
+        url: '',
+        votes: 0,
+        image: '',
+        couleur: '',
+        auteur: {}
+      },
+      auteurId: 0,
+      personnes: personnes
+    }
+  },
+  methods: {
+    ajouter: function() {
+      this.citation.auteur = this.auteurComplet
+      this.$emit('ajouter', this.citation)
+    }
+  },
+  computed: {
+    auteurComplet: function () {
+      return this.personnes.find(auteur => auteur.id === this.auteurId);
+    }
+  },
+  template:  `<form @submit.prevent="ajouter">
+                <div class="field">
+                  <label class="label">Titre</label>
+                  <div class="control">
+                    <input v-model="citation.titre"
+                           class="input" type="text"
+                           placeholder="Titre de votre citation">
+                  </div>
+                </div>
+                
+                <div class="field">
+                  <label class="label">URL</label>
+                  <div class="control">
+                    <input v-model="citation.url"
+                           class="input" type="text"
+                           placeholder="Lien vers la citation">
+                  </div>
+                </div>
+                
+                <div class="field">
+                  <label class="label">Texte</label>
+                  <div class="control">
+                    <textarea v-model="citation.texte"
+                              class="textarea"
+                              placeholder="Texte de votre citation"></textarea>
+                  </div>
+                </div>
+                
+                <div class="field">
+                  <label class="label">Couleur de fond de l'image</label>
+                  <div class="control">
+                    <input v-model="citation.couleur"
+                           class="input" type="text"
+                           placeholder="#ff00ff">
+                  </div>
+                </div>
+          
+                <div class="field">
+                  <div class="control">
+                    <label class="radio">
+                      <input v-model="citation.image"
+                             value="Lion.png" 
+                             type="radio" name="image">
+                      <img src="./img/animaux/Lion.png">
+                    </label>
+                    <label class="radio">
+                      <input v-model="citation.image"
+                             value="Ours.png" 
+                             type="radio" name="image">
+                      <img src="./img/animaux/Ours.png">
+                    </label>
+                    <label class="radio">
+                      <input v-model="citation.image"
+                             value="Chameau.png" 
+                             type="radio" name="image">
+                      <img src="./img/animaux/Chameau.png">
+                    </label>
+                    <label class="radio">
+                      <input v-model="citation.image"
+                             value="Elephant.png" 
+                             type="radio" name="image">
+                      <img src="./img/animaux/Elephant.png">
+                    </label>
+                  </div>
+                </div>
+          
+                <div class="field">
+                  <label class="label">Auteur</label>
+                  <div class="control">
+                    <div class="select">
+                      <select v-model="auteurId">
+                        <option disabled selected value="0">Sélectionner un auteur</option>
+                        <option v-for="personne in personnes"
+                                :key="personne.id"
+                                :value="personne.id">{{ personne.nom }}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+          
+                <button class="button is-primary">Ajouter la citation</button>
+              </form>`
+});
+
 let app = new Vue({
   el: '#app',
   components: {
@@ -137,6 +255,31 @@ let app = new Vue({
   },
   data: {
     citations: Data.citations
+  },
+  methods: {
+    genererId: function () {
+      let max = 0;
+      for(let citation of this.citations) {
+        if (citation.id > max) {
+          max = citation.id;
+        }
+      }
+      return max + 1;
+    },
+    ajouterCitation: function (citation) {
+      let newCitation = {
+        id: this.genererId(),
+        titre: citation.titre,
+        texte: citation.texte,
+        url: citation.url,
+        votes: citation.votes,
+        image: citation.image,
+        couleur: citation.couleur,
+        auteur: citation.auteur
+      }
+
+      this.citations.push(newCitation)
+    }
   },
   computed: {
     triParVotes: function () {
